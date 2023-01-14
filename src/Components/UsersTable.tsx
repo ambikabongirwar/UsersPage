@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useTable, Column } from 'react-table'
 import MOCK_DATA from './MOCK_DATA.json'
 import {COLUMNS} from './columns'
 import { IUser } from './Types'
 
 export default function UsersTable() {
-
+    
     const columns = useMemo<Column<IUser>[]>(() => COLUMNS, [])
     const data = useMemo<IUser[]>(() => MOCK_DATA, [])
 
@@ -21,7 +21,7 @@ export default function UsersTable() {
         getTableBodyProps,
         headerGroups,
         rows,
-        prepareRow
+        prepareRow,
     } = tableInstance
 
   return ( 
@@ -55,7 +55,6 @@ export default function UsersTable() {
             }
         </tbody>
     </table>
-
 </>
   )
 }

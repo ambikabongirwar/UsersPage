@@ -1,7 +1,20 @@
 import { IUser } from "./Types"
 import {Column} from 'react-table'
 
+function EditUser(row: any) {
+    console.log(row.original)
+}
+
 export const COLUMNS = [
+    {
+        Header: "",
+        id: "as",
+        Cell: ({ row }: any) => (
+          <button onClick={() => EditUser(row)}>
+            Detailed View
+          </button>
+        )
+      },
     {
         Header: "ID",
         accessor: "id"
