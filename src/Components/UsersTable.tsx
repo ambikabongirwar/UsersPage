@@ -3,6 +3,8 @@ import { useTable, Column } from 'react-table'
 import MOCK_DATA from './MOCK_DATA.json'
 import {COLUMNS} from './columns'
 import { IUser } from './Types'
+import './table.css'
+import { Container } from '@mui/system'
 
 export default function UsersTable() {
     
@@ -25,8 +27,8 @@ export default function UsersTable() {
     } = tableInstance
 
   return ( 
-    <>
-    <table {...getTableProps()}>
+    <Container>
+        <table {...getTableProps()} >
         <thead>
             {
                 headerGroups.map((headerGroup) => (
@@ -55,6 +57,6 @@ export default function UsersTable() {
             }
         </tbody>
     </table>
-</>
+    </Container>
   )
 }
