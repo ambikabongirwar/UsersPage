@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import UsersTable from './Components/UsersTable';
+import UserModal from './Components/UserModal';
 
 function App() {
   return (
