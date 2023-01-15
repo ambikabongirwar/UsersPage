@@ -102,6 +102,7 @@ export default function UsersTable() {
 
     useEffect(() => {
         editModalRef.current = modalData;
+        modalData.id = -1;
       }, [modalData]);
 
     function EditUser(row?: any) {
