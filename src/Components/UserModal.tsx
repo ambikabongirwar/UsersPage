@@ -22,7 +22,7 @@ export default function UserModal(props: Props) {
     first_name: props.first_name,
     last_name: props.last_name,
     role: props.role,})
-  const data = useMemo<IUser[]>(() => MOCK_DATA, [])
+  const data = useMemo<IUser[]>(() => MOCK_DATA["users"], [])
 
   const handleOpen = () => setOpen(true);
 

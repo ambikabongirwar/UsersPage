@@ -1,4 +1,4 @@
-[{"id":1,"first_name":"Enrika","last_name":"McSweeney","email":"emcsweeney0@constantcontact.com","status":"Invited","role":"Architect","lastLogin":"10/11/2022"},
+{"users":[{"id":1,"first_name":"Enrika","last_name":"McSweeney","email":"emcsweeney0@constantcontact.com","status":"Invited","role":"Architect","lastLogin":"10/11/2022"},
 {"id":2,"first_name":"Trev","last_name":"Dryden","email":"tdryden1@europa.eu","status":"Active","role":"Supervisor","lastLogin":"8/18/2022"},
 {"id":3,"first_name":"Elvis","last_name":"Tomasicchio","email":"etomasicchio2@delicious.com","status":"Active","role":"Engineer","lastLogin":"2/22/2022"},
 {"id":4,"first_name":"Reamonn","last_name":"Barhams","email":"rbarhams3@goo.gl","status":"Active","role":"Construction Worker","lastLogin":"12/11/2022"},
@@ -47,4 +47,4 @@
 {"id":47,"first_name":"Jenni","last_name":"Muzzollo","email":"jmuzzollo1a@ning.com","status":"Invited","role":"Construction Expeditor","lastLogin":"3/16/2022"},
 {"id":48,"first_name":"Giustino","last_name":"Burnel","email":"gburnel1b@dropbox.com","status":"Invited","role":"Subcontractor","lastLogin":"8/11/2022"},
 {"id":49,"first_name":"Luciana","last_name":"Durn","email":"ldurn1c@webmd.com","status":"Invited","role":"Estimator","lastLogin":"6/16/2022"},
-{"id":50,"first_name":"Gusty","last_name":"McCorry","email":"gmccorry1d@symantec.com","status":"Invited","role":"Construction Expeditor","lastLogin":"2/5/2022"}]
+{"id":50,"first_name":"Gusty","last_name":"McCorry","email":"gmccorry1d@symantec.com","status":"Invited","role":"Construction Expeditor","lastLogin":"2/5/2022"}]}

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useTable, Column } from 'react-table'
-import MOCK_DATA from './MOCK_DATA.json'
+import MOCK_DATA from "./MOCK_DATA.json"
 import { IUser } from './Types'
 import './table.css'
 import { Container } from '@mui/system'
@@ -8,7 +8,6 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import UserModal from './UserModal'
 import Button from '@mui/material/Button';
-
 
 export default function UsersTable() {
     const [modalData, setmodalData] = useState({id: -1,
@@ -70,7 +69,7 @@ export default function UsersTable() {
       ] as Column<IUser>[]
 
       const columns = useMemo<Column<IUser>[]>(() => COLUMNS, [])
-    const data = useMemo<IUser[]>(() => MOCK_DATA, [])
+    const data = useMemo<IUser[]>(() => MOCK_DATA["users"], [])
 
     const tableInstance = useTable(
         {
