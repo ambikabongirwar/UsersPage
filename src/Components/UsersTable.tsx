@@ -7,6 +7,7 @@ import { Container } from '@mui/system'
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import UserModal from './UserModal'
+import Button from '@mui/material/Button';
 
 
 export default function UsersTable() {
@@ -107,6 +108,7 @@ export default function UsersTable() {
   return ( 
     <>
     <Container>
+        <div className="header">Users <span><Button sx={{mx: 20 }} variant="contained">Add User</Button></span></div>
         <table {...getTableProps()} >
         <thead>
             {
