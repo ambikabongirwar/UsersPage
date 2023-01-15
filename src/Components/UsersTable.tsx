@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { useTable, Column, useSortBy } from 'react-table'
+import { useTable, Column, useSortBy, usePagination } from 'react-table'
 import MOCK_DATA from "./MOCK_DATA.json"
 import { IUser } from './Types'
 import './table.css'
@@ -78,15 +78,24 @@ export default function UsersTable() {
             columns, 
             data
         },
-        useSortBy)
+        useSortBy,
+        usePagination)
 
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
+        page,
+        nextPage,
+        previousPage,
         prepareRow,
+        canNextPage,
+        canPreviousPage,
+        pageOptions,
+        state,
     } = tableInstance
+
+    const { pageIndex } = state 
 
     useEffect(() => {
         editModalRef.current = modalData;
@@ -131,7 +140,7 @@ export default function UsersTable() {
         </thead>
         <tbody {...getTableBodyProps()}>
             {
-                rows.map(row => {
+                page.map(row => {
                     prepareRow(row)
                     return(
                         <tr {...row.getRowProps()}>
@@ -144,6 +153,17 @@ export default function UsersTable() {
             }
         </tbody>
         </table>
+        <div>
+            <span>
+                Page{" "}
+                <strong>
+                    {pageIndex + 1} of {pageOptions.length}
+                </strong>
+                Page{" "}
+            </span>
+            <Button sx={{mx: 20 }} variant="contained" onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
+            <Button sx={{mx: 20 }} variant="contained" onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
+        </div>
     </Container>
     { modalData.id !== -1 ? <LookForClicks></LookForClicks> : <p></p>}
     </>
