@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { useTable, Column } from 'react-table'
+import { useTable, Column, useSortBy } from 'react-table'
 import MOCK_DATA from "./MOCK_DATA.json"
 import { IUser } from './Types'
 import './table.css'
@@ -8,6 +8,8 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import UserModal from './UserModal'
 import Button from '@mui/material/Button';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export default function UsersTable() {
     const [modalData, setmodalData] = useState({id: -1,
@@ -75,8 +77,8 @@ export default function UsersTable() {
         {
             columns, 
             data
-        }
-        )
+        },
+        useSortBy)
 
     const {
         getTableProps,
@@ -115,7 +117,12 @@ export default function UsersTable() {
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {
                             headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                    {column.render('Header')}
+                                    <span>
+                                        {column.isSorted ? (column.isSortedDesc ? <ArrowDropUpIcon/> : <ArrowDropUpIcon/> ) : ""}
+                                    </span>
+                                </th>
                             ))
                         }
                     </tr>
