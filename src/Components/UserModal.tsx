@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 type Props = {
@@ -24,6 +23,7 @@ export default function UserModal(props: Props) {
   }
 
   const onConfirmEdit = () => {
+    
     setOpen(false);
   };
 
@@ -32,6 +32,7 @@ export default function UserModal(props: Props) {
   }
 
   return (
+    <div>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Edit User</DialogTitle>
         <DialogContent>
@@ -43,7 +44,7 @@ export default function UserModal(props: Props) {
             type="string"
             fullWidth
             variant="standard"
-            defaultValue = "name"
+            defaultValue = {props.first_name}
           />
           <TextField
             autoFocus
@@ -53,6 +54,7 @@ export default function UserModal(props: Props) {
             type="string"
             fullWidth
             variant="standard"
+            defaultValue = {props.last_name}
           />
           <TextField
             autoFocus
@@ -62,6 +64,7 @@ export default function UserModal(props: Props) {
             type="string"
             fullWidth
             variant="standard"
+            defaultValue = {props.role}
           />
         </DialogContent>
         <DialogActions>
@@ -69,5 +72,6 @@ export default function UserModal(props: Props) {
           <Button onClick={onCancel}>Cancel</Button>
         </DialogActions>
       </Dialog>
+    </div>
   );
 }
