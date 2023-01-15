@@ -10,6 +10,7 @@ import UserModal from './UserModal'
 import Button from '@mui/material/Button';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import AddUserModal from './AddUserModal'
 
 export default function UsersTable() {
     const [modalData, setmodalData] = useState({id: -1,
@@ -92,6 +93,8 @@ export default function UsersTable() {
         canNextPage,
         canPreviousPage,
         pageOptions,
+        gotoPage,
+        pageCount,
         state,
     } = tableInstance
 
@@ -118,7 +121,7 @@ export default function UsersTable() {
   return ( 
     <>
     <Container>
-        <div className="header">Users <span><Button sx={{mx: 20 }} variant="contained">Add User</Button></span></div>
+        <div className="header">Users <span><Button sx={{mx: 20 }} variant="contained" onClick={() => {<AddUserModal></AddUserModal>}}>Add User</Button></span></div>
         <table {...getTableProps()} >
         <thead>
             {
@@ -161,8 +164,15 @@ export default function UsersTable() {
                 </strong>
                 Page{" "}
             </span>
-            <Button sx={{mx: 20 }} variant="contained" onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
-            <Button sx={{mx: 20 }} variant="contained" onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
+            {/*<span>
+                | Go to page: {' '}
+                <input type='number' defaultValue={pageIndex + 1} onChange={e => {const pageNumber = e.target.value ? Number(e.target.value) - 1: 0
+                gotoPage(pageNumber)}} />
+                </span>*/}
+            <Button onClick = {() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</Button>
+            <Button variant="contained" onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
+            <Button variant="contained" onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
+            <Button onClick = {() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</Button>
         </div>
     </Container>
     { modalData.id !== -1 ? <LookForClicks></LookForClicks> : <p></p>}
