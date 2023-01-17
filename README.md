@@ -3,10 +3,10 @@ To run the code:
 ` npm install ` and 
 ` npm start `         
 
-User Page Table with Pagination and Sorting: 
+User Page Table with Pagination and Sorting 
 
-[Users Page](https://photos.app.goo.gl/wL3WpSKuLNo3pdpu9)
+[Users Page](https://drive.google.com/file/d/1-u9vZtjktS1GJiCyhI1XnEN-IfVDhwbY/view?usp=drivesdk)
 
 Edit Modal: 
 
-[Edit Modal](https://photos.app.goo.gl/KjgakH2Gzea5eVr69)
+[Edit Modal](https://drive.google.com/file/d/1-w0rwuJjP5pOfiAy3ORU6orFqdabdOM7/view?usp=drivesdk)
