@@ -4,6 +4,7 @@ import './App.css';
 import UsersTable from './Components/UsersTable';
 import {ReactQueryDevtools} from 'react-query/devtools';
 import * as api from './Components/usersApi';
+import UserTableData from './Components/UserTableData';
 
 function App() {
   /*
@@ -17,17 +18,18 @@ function App() {
     setTableData(data?.data);
   }, [])
 
+  
   if (isLoading || !tableData) {
     return <div>Loading...</div>
   }
   */
   return (
     <QueryClientProvider client={new QueryClient()}>
-        <div className="App">
-        <UsersTable></UsersTable>
-        <br/>
-        </div>
-        <ReactQueryDevtools></ReactQueryDevtools>
+    <div className="App">
+    <UserTableData></UserTableData>
+    <br/>
+    </div>
+    <ReactQueryDevtools></ReactQueryDevtools>
     </QueryClientProvider>
   );
 }

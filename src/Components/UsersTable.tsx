@@ -12,7 +12,11 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import AddUserModal from './AddUserModal'
 
-export default function UsersTable() {
+type Props = {
+    data: IUser[];
+}
+
+export default function UsersTable(props: Props) {
     const [modalData, setmodalData] = useState({id: -1,
         first_name: "",
         last_name: "",
@@ -21,7 +25,7 @@ export default function UsersTable() {
     first_name: "",
     last_name: "",
     role: "",});
-    
+     
     const COLUMNS = [
         {
             Header: "ID",
@@ -72,12 +76,17 @@ export default function UsersTable() {
       ] as Column<IUser>[]
 
       const columns = useMemo<Column<IUser>[]>(() => COLUMNS, [])
-    const data = useMemo<IUser[]>(() => MOCK_DATA["users"], [])
+    const userData = useMemo<IUser[]>(() => props.data, [])
+
+      useEffect(() => {
+        editModalRef.current = modalData;
+        modalData.id = -1;
+      }, [modalData]);
 
     const tableInstance = useTable(
         {
             columns, 
-            data
+            data: userData
         },
         useSortBy,
         usePagination)
@@ -99,11 +108,6 @@ export default function UsersTable() {
     } = tableInstance
 
     const { pageIndex } = state 
-
-    useEffect(() => {
-        editModalRef.current = modalData;
-        modalData.id = -1;
-      }, [modalData]);
 
     function EditUser(row?: any) {
         console.log("EditUser: " + JSON.stringify(row.original));
