@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import MOCK_DATA from './MOCK_DATA.json'
 import { IUser } from './Types';
 import { Typography } from '@mui/material';
+import { useAddUser } from './UserTableData';
 
 type modalData = {
   id: number,
@@ -17,6 +18,7 @@ type modalData = {
 }
 
 type Props = {
+  title: string;
   id: number;
   first_name: string;
   last_name: string;
@@ -33,24 +35,31 @@ export default function UserModal(props: Props) {
     id: props.id,
     first_name: props.first_name,
     last_name: props.last_name,
+    email: "",
     role: props.role,})
-  const data = useMemo<IUser[]>(() => MOCK_DATA["users"], [])
+  //const [newUser, setNewUser] = useState
+
+  const {mutate: addUser} = useAddUser()
 
   const handleOpen = () => setOpen(true);
 
-  const handleClose = () => {
-    setOpen(false);
-  }
+  const handleClose = () => setOpen(false);
 
   const onConfirmEdit = () => {
-    console.log("OnConfimEdit: " + props.id + " " + props.first_name + " " + props.last_name + " " + props.role)
-    console.log("Data Before: " + props.id + " " + data[props.id - 1].first_name + " " + data[props.id - 1].last_name + " " + data[props.id - 1].role)
-    data[props.id  - 1].first_name = user.first_name;
-    data[props.id - 1].last_name = user.last_name;
-    data[props.id - 1].role = user.role;
-    console.log("Data After: " + props.id + " " + data[props.id - 1].first_name + " " + data[props.id - 1].last_name + " " + data[props.id - 1].role)
-    if(props.setUserModalClicked !== undefined)
-        props.setUserModalClicked(0);
+    // console.log("OnConfimEdit: " + props.id + " " + props.first_name + " " + props.last_name + " " + props.role)
+    // console.log("Data Before: " + props.id + " " + data[props.id - 1].first_name + " " + data[props.id - 1].last_name + " " + data[props.id - 1].role)
+    // data[props.id  - 1].first_name = user.first_name;
+    // data[props.id - 1].last_name = user.last_name;
+    // data[props.id - 1].role = user.role;
+    // console.log("Data After: " + props.id + " " + data[props.id - 1].first_name + " " + data[props.id - 1].last_name + " " + data[props.id - 1].role)
+    if(props.setUserModalClicked !== undefined) {
+      let currentDate = new Date();
+      let date: string = (currentDate.getDate() + "/" + currentDate.getMonth() + 1 + "/" + currentDate.getFullYear());
+      const newUser: IUser = {id: props.id, first_name:user.first_name, last_name:user.last_name, email:user.email, status:"Invited", role:user.role, lastLogin:date};
+      console.log(newUser);
+      addUser(newUser)
+      props.setUserModalClicked(0);
+    }
     if(props.setmodalData !== undefined)
         props.setmodalData({id: -1, first_name: "", last_name: "", role: ""})
     setOpen(false);
@@ -59,6 +68,8 @@ export default function UserModal(props: Props) {
   const onCancel = () => {
     if(props.setUserModalClicked !== undefined)
         props.setUserModalClicked(0);
+    if(props.setmodalData !== undefined)
+        props.setmodalData({id: -1, first_name: "", last_name: "", role: ""})
     setOpen(false);
   }
   let name, value;
@@ -74,7 +85,7 @@ export default function UserModal(props: Props) {
     <div>
       <form>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit User</DialogTitle>
+        <DialogTitle>{props.title}</DialogTitle>
           <DialogContent>
           <TextField
               autoFocus
@@ -112,6 +123,18 @@ export default function UserModal(props: Props) {
               onChange={(e) => handleInputs(e)}
               defaultValue = {props.last_name}
             />
+            {props.setUserModalClicked !== undefined ? <TextField
+              autoFocus
+              margin="dense"
+              id="email"
+              label="Email Address"
+              type="string"
+              fullWidth
+              variant="standard"
+              value = {user.email}
+              onChange={(e) => handleInputs(e)}
+              defaultValue = {""}
+            /> : <></>}
             <TextField
               autoFocus
               margin="dense"

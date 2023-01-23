@@ -1,18 +1,14 @@
 import axios from 'axios'
-import { useQuery, UseQueryResult } from 'react-query'
-import { IUser } from './Types'
+import { useQuery, UseQueryResult, useMutation } from 'react-query'
+import { customQueryResultType, IUser } from './Types'
 import UsersTable from './UsersTable'
 
-type customQueryResultType = {
-    data: IUser[];
-    status: number;
-    statusText: string;
-    headers: any;
-    config: string;
+export const fetchUsers = ():Promise<customQueryResultType> => {
+    return axios.get('http://localhost:4000/users')
 }
 
-const fetchUsers = ():Promise<customQueryResultType> => {
-    return axios.get('http://localhost:4000/users')
+const addUser = (user: IUser) => {
+  return axios.post('http://localhost:4000/users', user)
 }
 
 export default function UserTableData() {
@@ -28,4 +24,8 @@ export default function UserTableData() {
                {status === "success" && <UsersTable data={data.data}></UsersTable>}
     </div>
   )
+}
+
+export const useAddUser = () => {
+  return useMutation(addUser)
 }

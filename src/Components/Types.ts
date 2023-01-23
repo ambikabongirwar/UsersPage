@@ -7,3 +7,11 @@ export interface IUser {
     role: string;
     lastLogin?: string 
 }
+
+export type customQueryResultType = {
+    data: IUser[];
+    status: number;
+    statusText: string;
+    headers: any;
+    config: string;
+}

@@ -112,7 +112,7 @@ export default function UsersTable(props: Props) {
         if(row.original !== undefined) {
             setmodalData(row.original);
             console.log("EditUserInsideIf: " + JSON.stringify(row.original));
-            return <UserModal id={row.original.id} first_name={row.original.first_name} last_name={row.original.last_name} role={row.original.role} ></UserModal>
+            return <UserModal title={"Edit User"} id={row.original.id} first_name={row.original.first_name} last_name={row.original.last_name} role={row.original.role} ></UserModal>
         }
         return <p></p>
       }
@@ -180,8 +180,8 @@ export default function UsersTable(props: Props) {
             <Button onClick = {() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</Button>
         </div>
     </Container>
-    { modalData.id !== -1 ? <UserModal id={modalData.id} first_name={modalData.first_name} last_name={modalData.last_name} role={modalData.role} modalData={modalData} setmodalData={setmodalData}></UserModal> : <p></p>}
-    { userModalClicked === 1 ? <AddUserModal userModalClicked={userModalClicked} setUserModalClicked={setUserModalClicked} ></AddUserModal> : <p></p>}
+    { modalData.id !== -1 ? <UserModal title={"Edit User"} id={modalData.id} first_name={modalData.first_name} last_name={modalData.last_name} role={modalData.role} modalData={modalData} setmodalData={setmodalData}></UserModal> : <p></p>}
+    { userModalClicked === 1 ? <AddUserModal title={"Add User"} userModalClicked={userModalClicked} setUserModalClicked={setUserModalClicked} ></AddUserModal> : <p></p>}
     </>
   )
 }
