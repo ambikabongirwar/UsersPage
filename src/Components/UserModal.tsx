@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import MOCK_DATA from './MOCK_DATA.json'
 import { IUser } from './Types';
 import { Typography } from '@mui/material';
-import { useAddUser } from './UserTableData';
+import { useAddUser, useUpdateUser } from './UserTableData';
 
 type modalData = {
   id: number,
@@ -22,7 +22,10 @@ type Props = {
   id: number;
   first_name: string;
   last_name: string;
+  email?: string,
+  status?: string,
   role: string;
+  lastLogin?: string;
   userModalClicked?: number;
   setUserModalClicked?: Dispatch<SetStateAction<number>>;
   modalData?: modalData;
@@ -40,6 +43,7 @@ export default function UserModal(props: Props) {
   //const [newUser, setNewUser] = useState
 
   const {mutate: addUser} = useAddUser()
+  const {mutate: updateUserData} = useUpdateUser()
 
   const handleOpen = () => setOpen(true);
 
@@ -60,8 +64,11 @@ export default function UserModal(props: Props) {
       addUser(newUser)
       props.setUserModalClicked(0);
     }
-    if(props.setmodalData !== undefined)
-        props.setmodalData({id: -1, first_name: "", last_name: "", role: ""})
+    if(props.setmodalData !== undefined && props.email !== undefined) {
+      const updatedUser: IUser = {id: props.id, first_name:user.first_name, last_name:user.last_name, email:props.email, status:props.status, role:user.role, lastLogin: props.lastLogin};
+      updateUserData(updatedUser)
+      props.setmodalData({id: -1, first_name: "", last_name: "", role: ""})
+    }
     setOpen(false);
   };
 

@@ -11,7 +11,7 @@ type Props = {
 }
 
 export default function AddUserModal(props: Props) {
-  const { error, status, data } = useQuery('users', fetchUsers, {cacheTime: 20,}) as UseQueryResult<customQueryResultType, Error>
+  const { error, status, data } = useQuery('users', fetchUsers) as UseQueryResult<customQueryResultType, Error>
 
   function getUserTableSize() {
     if (data !== undefined)

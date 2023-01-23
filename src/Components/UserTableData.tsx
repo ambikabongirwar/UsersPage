@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useQuery, UseQueryResult, useMutation } from 'react-query'
+import { useQuery, UseQueryResult, useMutation, Mutation } from 'react-query'
 import { customQueryResultType, IUser } from './Types'
 import UsersTable from './UsersTable'
 
@@ -11,8 +11,12 @@ const addUser = (user: IUser) => {
   return axios.post('http://localhost:4000/users', user)
 }
 
-const deleteUserData = (id: IUser) => {
+const deleteUserData = (id: number) => {
   return axios.delete(`http://localhost:4000/users/${id}`)
+}
+
+const updateUserData = (data: IUser) => {
+  return axios.put(`http://localhost:4000/users/${data.id}`, data)
 }
 
 export default function UserTableData() {
@@ -36,4 +40,8 @@ export const useAddUser = () => {
 
 export const useDeleteUser = () => {
   return useMutation(deleteUserData)
+}
+
+export const useUpdateUser = () => {
+  return useMutation(updateUserData)
 }

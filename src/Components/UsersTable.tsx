@@ -184,7 +184,7 @@ export default function UsersTable(props: Props) {
             <Button onClick = {() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</Button>
         </div>
     </Container>
-    { modalData.id !== -1 ? <UserModal title={"Edit User"} id={modalData.id} first_name={modalData.first_name} last_name={modalData.last_name} role={modalData.role} modalData={modalData} setmodalData={setmodalData}></UserModal> : <p></p>}
+    { modalData.id !== -1 ? <UserModal title={"Edit User"} id={modalData.id} first_name={modalData.first_name} last_name={modalData.last_name} email={userData[modalData.id - 1].email} status={userData[modalData.id - 1].status} role={modalData.role} lastLogin={userData[modalData.id - 1].lastLogin} modalData={modalData} setmodalData={setmodalData}></UserModal> : <p></p>}
     { userModalClicked === 1 ? <AddUserModal title={"Add User"} userModalClicked={userModalClicked} setUserModalClicked={setUserModalClicked} ></AddUserModal> : <p></p>}
     </>
   )
