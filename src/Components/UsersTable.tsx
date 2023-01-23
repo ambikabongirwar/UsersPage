@@ -105,6 +105,7 @@ export default function UsersTable(props: Props) {
         pageOptions,
         gotoPage,
         pageCount,
+        setPageSize,
         selectedFlatRows,
         state: { selectedRowIds, pageIndex, pageSize }
     } = tableInstance
@@ -178,6 +179,15 @@ export default function UsersTable(props: Props) {
                 <input type='number' defaultValue={pageIndex + 1} onChange={e => {const pageNumber = e.target.value ? Number(e.target.value) - 1: 0
                 gotoPage(pageNumber)}} />
                 </span>*/}
+            <select value = {pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                {
+                    [10, 20, 30, 50].map(pageSize => (
+                        <option key = {pageSize} value={pageSize}>
+                            Show {pageSize}
+                        </option>
+                    ))
+                }
+            </select>
             <Button onClick = {() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</Button>
             <Button variant="contained" onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
             <Button variant="contained" onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
