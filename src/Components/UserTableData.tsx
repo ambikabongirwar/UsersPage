@@ -11,8 +11,12 @@ const addUser = (user: IUser) => {
   return axios.post('http://localhost:4000/users', user)
 }
 
+const deleteUserData = (id: IUser) => {
+  return axios.delete(`http://localhost:4000/users/${id}`)
+}
+
 export default function UserTableData() {
-    const { error, status, data } = useQuery('users', fetchUsers, {cacheTime: 20,}) as UseQueryResult<customQueryResultType, Error>
+    const { error, status, data } = useQuery('users', fetchUsers) as UseQueryResult<customQueryResultType, Error>
 
     console.log(data)
   return (
@@ -28,4 +32,8 @@ export default function UserTableData() {
 
 export const useAddUser = () => {
   return useMutation(addUser)
+}
+
+export const useDeleteUser = () => {
+  return useMutation(deleteUserData)
 }

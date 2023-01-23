@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import AddUserModal from './AddUserModal'
+import { useDeleteUser } from './UserTableData'
 
 type Props = {
     data: IUser[];
@@ -77,6 +78,7 @@ export default function UsersTable(props: Props) {
       const columns = useMemo<Column<IUser>[]>(() => COLUMNS, [])
     const userData = useMemo<IUser[]>(() => props.data, [])
     const [userModalClicked, setUserModalClicked] = useState(0)
+    const {mutate: deleteUserData} = useDeleteUser()
 
       useEffect(() => {
         editModalRef.current = modalData;
@@ -119,7 +121,9 @@ export default function UsersTable(props: Props) {
 
     function deleteUser(row?: any) {
         if(row.original !== undefined) {
-            alert("Do you want to delete " + row.original.first_name + " " + row.original.last_name);
+            if (window.confirm("Do you want to delete " + row.original.first_name + " " + row.original.last_name) == true) {
+                deleteUserData(row.original.id)
+            }
         }
     }
 
