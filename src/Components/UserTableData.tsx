@@ -3,20 +3,22 @@ import { useQuery, UseQueryResult, useMutation, Mutation } from 'react-query'
 import { customQueryResultType, IUser } from './Types'
 import UsersTable from './UsersTable'
 
+export const baseURL = "https://ambikabongirwar.github.io/UsersPage/src/Components/MOCK_DATA.json"
+
 export const fetchUsers = ():Promise<customQueryResultType> => {
-    return axios.get('http://localhost:4000/users')
+    return axios.get(baseURL)
 }
 
 const addUser = (user: IUser) => {
-  return axios.post('http://localhost:4000/users', user)
+  return axios.post(baseURL + user)
 }
 
 const deleteUserData = (id: number) => {
-  return axios.delete(`http://localhost:4000/users/${id}`)
+  return axios.delete(`${baseURL}/${id}`)
 }
 
 const updateUserData = (data: IUser) => {
-  return axios.put(`http://localhost:4000/users/${data.id}`, data)
+  return axios.put(`${baseURL}/${data.id}`, data)
 }
 
 export default function UserTableData() {

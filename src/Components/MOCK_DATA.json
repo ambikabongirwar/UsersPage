@@ -1,5 +1,4 @@
-{
-  "users": [
+[
     {
       "id": 1,
       "first_name": "Enrikaasdadsa",
@@ -460,4 +459,3 @@
       "lastLogin": "23/01/2023"
     }
   ]
-}
