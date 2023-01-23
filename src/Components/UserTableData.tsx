@@ -16,7 +16,7 @@ const fetchUsers = ():Promise<customQueryResultType> => {
 }
 
 export default function UserTableData() {
-    const { error, status, data } = useQuery('users', fetchUsers) as UseQueryResult<customQueryResultType, Error>
+    const { error, status, data } = useQuery('users', fetchUsers, {cacheTime: 20,}) as UseQueryResult<customQueryResultType, Error>
 
     console.log(data)
   return (

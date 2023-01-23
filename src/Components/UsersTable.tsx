@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useTable, Column, useSortBy, usePagination } from 'react-table'
-import MOCK_DATA from "./MOCK_DATA.json"
 import { IUser } from './Types'
 import './table.css'
 import { Container } from '@mui/system'
@@ -68,7 +67,7 @@ export default function UsersTable(props: Props) {
             Header: "",
             id: "delete",
             Cell: ({ row }: any) => (
-              <button onClick={() => EditUser(row)}>
+              <button onClick={() => deleteUser(row)}>
                 <DeleteOutlineIcon/>
               </button>
             )
@@ -77,10 +76,10 @@ export default function UsersTable(props: Props) {
 
       const columns = useMemo<Column<IUser>[]>(() => COLUMNS, [])
     const userData = useMemo<IUser[]>(() => props.data, [])
+    const [userModalClicked, setUserModalClicked] = useState(0)
 
       useEffect(() => {
         editModalRef.current = modalData;
-        modalData.id = -1;
       }, [modalData]);
 
     const tableInstance = useTable(
@@ -104,10 +103,9 @@ export default function UsersTable(props: Props) {
         pageOptions,
         gotoPage,
         pageCount,
-        state,
+        selectedFlatRows,
+        state: { selectedRowIds, pageIndex, pageSize }
     } = tableInstance
-
-    const { pageIndex } = state 
 
     function EditUser(row?: any) {
         console.log("EditUser: " + JSON.stringify(row.original));
@@ -119,14 +117,16 @@ export default function UsersTable(props: Props) {
         return <p></p>
       }
 
-      function LookForClicks() {
-        return <UserModal id={modalData.id} first_name={modalData.first_name} last_name={modalData.last_name} role={modalData.role}></UserModal>;
-      }
+    function deleteUser(row?: any) {
+        if(row.original !== undefined) {
+            alert("Do you want to delete " + row.original.first_name + " " + row.original.last_name);
+        }
+    }
 
   return ( 
     <>
     <Container>
-        <div className="header">Users <span><Button sx={{mx: 20 }} variant="contained" onClick={() => {<AddUserModal></AddUserModal>}}>Add User</Button></span></div>
+        <div className="header">Users <span><Button sx={{mx: 20 }} variant="contained" onClick={() => {setUserModalClicked(1)}}>Add User</Button></span></div>
         <table {...getTableProps()} >
         <thead>
             {
@@ -180,7 +180,8 @@ export default function UsersTable(props: Props) {
             <Button onClick = {() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</Button>
         </div>
     </Container>
-    { modalData.id !== -1 ? <LookForClicks></LookForClicks> : <p></p>}
+    { modalData.id !== -1 ? <UserModal id={modalData.id} first_name={modalData.first_name} last_name={modalData.last_name} role={modalData.role} modalData={modalData} setmodalData={setmodalData}></UserModal> : <p></p>}
+    { userModalClicked === 1 ? <AddUserModal userModalClicked={userModalClicked} setUserModalClicked={setUserModalClicked} ></AddUserModal> : <p></p>}
     </>
   )
 }
